@@ -1,0 +1,6 @@
+TOKEN =
+VERSION = '5.154'
+USER_ID =
+FIELDS = 'domain, sex, bdate, city, universities'
+TABLE_NAME = 'frens'
+

@@ -3,30 +3,23 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 
-from constants import TABLE_NAME
-
-
 class Database:
     def __init__(self, friends_list):
         self.friends_list = friends_list
         self.session: None
-        self.table = TABLE_NAME
 
     def _connect(self):
         engine = create_engine('sqlite:///frensdb.db')
         base = declarative_base()
         ses = sessionmaker(bind=engine)
-
         base.metadata.create_all(engine)
-
         self.session = ses()
         self.session.begin()
 
     def _table_exists(self):
         tab = self.session.execute(text(
             "SELECT tbl_name FROM sqlite_master WHERE type='table' \
-            AND tbl_name=:table")
-               .bindparams(table=self.table)
+            AND tbl_name=frens")
                .fetchone()
                )
         if tab:
